@@ -1,0 +1,100 @@
+openapi: 3.0.2
+info:
+  title: EazyBank Account Details Retrieval API
+  description: API to retrieve user account details from Firestore based on phone number.
+  version: 1.0.0
+servers:
+  - url: 'https://eazybank-new-applicant-checker-839338236077.us-central1.run.app'
+paths:
+  /user_details:
+    post:
+      summary: Retrieve user account details by phone number
+      description: Returns user account details (user_name, account_status, reason, account_number, account_balance, credit_card_number) from Firestore based on the provided phone number.
+      operationId: getUserDetails
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone_no:
+                  type: integer
+                  description: The user's registered phone number.
+                  example: 1234567890  # Example phone number
+      responses:
+        '200':
+          description: Successful response - User details retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_name:
+                    type: string
+                    description: The user's name.
+                    example: "Sarah Connor"
+                  account_status:
+                    type: string
+                    description: The status of the user's account (approved, rejected, in progress, unknown).
+                    example: "approved"
+                  reason:
+                    type: string
+                    description: The reason for account rejection (if applicable).
+                    example: "Missing address information"
+                  account_number:
+                    type: integer
+                    description: The user's account number.
+                    example: 9876543210
+                  account_balance:
+                    type: string
+                    description: The user's account balance.
+                    example: "$1000.00"
+                  credit_card_number:
+                    type: string
+                    description: The user's associated credit card number.
+                    example: "************1234"
+        '400':
+          description: Bad Request - Missing phone_no in request body
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "Missing phone_no in request body"
+        '404':
+          description: Not Found - User not found with the provided phone_no
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "User not found with phone_no: 1234567890"
+        '405':
+          description: Method Not Allowed - Only POST requests are allowed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "Only POST requests are allowed"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+                    example: "Database connection error"
