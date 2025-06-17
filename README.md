@@ -37,7 +37,7 @@ At any point, you can ask to speak to a human agent (e.g., "I want to speak to a
 
 Market Insights:
 --------------------
-Ask about EazyBank's market performance (e.g., "How is EazyBank performing in the market?", "What is EazyBank's stock price?"). Verify that the agent provides the latest stock price and relevant market news.
+Ask about EazyBank's market performance (e.g., "How is Bank of America performing in the market?", "What is Bank of America's stock price?"). Verify that the agent provides the latest stock price and relevant market news.
 
 Expected Outcomes:
 ------------------------
